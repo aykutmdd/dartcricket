@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dart Cricket</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div id="setup-screen">
+
+<h1>DART CRICKET</h1>
+
+<h2>Kaç oyuncu?</h2>
+
+<div class="player-count">
+
+<button onclick="selectPlayerCount(2)">2 Oyuncu</button>
+
+<button onclick="selectPlayerCount(3)">3 Oyuncu</button>
+
+<button onclick="selectPlayerCount(4)">4 Oyuncu</button>
+
+</div>
+
+<div id="player-inputs"></div>
+
+</div>
+
+<div id="game-screen" class="hidden">
+
+<div id="scoreboard"></div>
+
+<div id="controls"></div>
+
+</div>
+
+<script src="app.js"></script>
+
+</body>
+</html>
