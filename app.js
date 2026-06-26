@@ -497,6 +497,16 @@ currentTurnShots.shift();
 
 }
 
+if(currentTurnShots.length === 3){
+
+    setTimeout(function(){
+
+        nextPlayer();
+
+    },600);
+
+}
+
 renderBoard();
 
 }
@@ -525,6 +535,16 @@ currentTurnShots.push(shot);
 if(currentTurnShots.length > 3){
 
 currentTurnShots.shift();
+
+}
+
+if(currentTurnShots.length === 3){
+
+    setTimeout(function(){
+
+        nextPlayer();
+
+    },600);
 
 }
 
