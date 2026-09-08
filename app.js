@@ -1,3 +1,4 @@
+/* UI FIX v2: tek satır hedef butonları + sabit skor satırları */
 let playerCount = 0;
 
 const cricketNumbers = [
@@ -175,9 +176,6 @@ function renderControls() {
                 ${createTargetButton("19")}
                 ${createTargetButton("18")}
                 ${createTargetButton("17")}
-            </div>
-
-            <div class="button-row target-row">
                 ${createTargetButton("16")}
                 ${createTargetButton("15")}
                 ${createTargetButton("BULL", true)}

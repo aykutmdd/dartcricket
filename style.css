@@ -228,3 +228,112 @@ padding:8px;
  .target-button{min-width:52px;padding:0 6px}
  .action-button{min-width:82px;padding:0 6px}
 }
+
+
+/* ===== UI FIX v2 ===== */
+
+/* Hedef butonlarını tek satırda tut */
+.target-row{
+    flex-wrap:nowrap !important;
+    justify-content:center;
+    gap:6px;
+}
+
+.target-row .target-button{
+    flex:1 1 0;
+    max-width:120px;
+    min-width:64px;
+}
+
+/* BULL butonunu ve hedef hücresini biraz genişlet */
+.target-row .bull-button{
+    min-width:88px;
+    max-width:132px;
+}
+
+.dart-scoreboard .number-header,
+.dart-scoreboard .target-number{
+    width:10%;
+    min-width:74px;
+    white-space:nowrap;
+}
+
+/* X ve Ⓧ geldiğinde satır yüksekliği kesinlikle değişmesin */
+.dart-scoreboard tbody tr,
+.dart-scoreboard tr{
+    height:44px;
+}
+
+.dart-scoreboard th,
+.dart-scoreboard td{
+    vertical-align:middle;
+    line-height:1 !important;
+}
+
+.dart-scoreboard .mark-cell{
+    height:44px !important;
+    min-height:44px !important;
+    max-height:44px !important;
+    padding:0 !important;
+    line-height:44px !important;
+    overflow:hidden;
+    white-space:nowrap;
+}
+
+.dart-scoreboard .target-number{
+    height:44px !important;
+    min-height:44px !important;
+    max-height:44px !important;
+    padding:0 6px !important;
+    line-height:44px !important;
+    overflow:hidden;
+}
+
+/* Başlık satırı da sabit kalsın */
+.dart-scoreboard th{
+    height:52px !important;
+    min-height:52px !important;
+    max-height:52px !important;
+}
+
+/* Kısa ekranlarda da tek satır hedef butonları */
+@media (max-height:700px){
+    .dart-scoreboard tbody tr,
+    .dart-scoreboard tr{
+        height:34px;
+    }
+
+    .dart-scoreboard .mark-cell{
+        height:34px !important;
+        min-height:34px !important;
+        max-height:34px !important;
+        line-height:34px !important;
+    }
+
+    .dart-scoreboard .target-number{
+        height:34px !important;
+        min-height:34px !important;
+        max-height:34px !important;
+        line-height:34px !important;
+    }
+
+    .dart-scoreboard th{
+        height:40px !important;
+        min-height:40px !important;
+        max-height:40px !important;
+    }
+
+    .target-row{
+        gap:4px;
+    }
+
+    .target-row .target-button{
+        min-width:58px;
+        height:36px;
+        padding:0 6px;
+    }
+
+    .target-row .bull-button{
+        min-width:76px;
+    }
+}
