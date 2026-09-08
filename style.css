@@ -154,3 +154,77 @@ padding:8px;
 
 
 
+
+
+/* ===== 6 OYUNCU / TEK BUTON YENI DUZEN ===== */
+*{box-sizing:border-box}
+#game-screen{width:100%;min-height:100vh;padding:6px 10px}
+#scoreboard{width:100%;overflow-x:auto}
+
+.dart-scoreboard{
+ width:100%;border-collapse:collapse;table-layout:fixed;text-align:center;
+ background:#101010;border:1px solid #292929;border-radius:12px;overflow:hidden
+}
+.dart-scoreboard th,.dart-scoreboard td{border:1px solid #292929}
+.dart-scoreboard th{height:52px;padding:4px 2px;font-size:clamp(14px,1.6vw,24px)}
+.dart-scoreboard .number-header{width:8%;color:#f0b400;font-size:clamp(12px,1.2vw,18px)}
+.dart-scoreboard .active-player{outline:none;background:#142019;box-shadow:inset 0 0 0 2px #00ff66}
+.player-score{display:block;margin-top:3px;color:#00ff66;font-weight:800}
+.target-number{width:8%;color:#f0b400;font-weight:800;font-size:clamp(22px,2.3vw,36px)}
+.mark-cell{height:44px;font-size:clamp(27px,2.8vw,42px);font-weight:700}
+
+.turn-shots{display:flex;justify-content:center;gap:8px;margin:6px auto 0}
+.dart-box{width:clamp(68px,8vw,105px);height:34px;border-width:1px;border-radius:9px;font-size:clamp(16px,1.7vw,23px)}
+
+.button-grid{gap:5px;margin-top:6px}
+.button-row{width:100%;flex-wrap:nowrap;gap:6px}
+.target-button{
+ flex:0 1 112px;min-width:60px;height:42px;padding:0 10px;margin:0;
+ border:1px solid #424242;border-radius:11px;background:#202020;
+ font-size:clamp(18px,2vw,27px);font-weight:800;
+ touch-action:manipulation;user-select:none;-webkit-user-select:none
+}
+.bull-button{min-width:88px}
+.action-row{margin-top:1px}
+.action-button{
+ min-width:96px;height:35px;padding:0 11px;margin:0;border-radius:9px;
+ font-size:clamp(12px,1.25vw,16px)
+}
+.miss-button{color:#ffcb55}
+
+.multiplier-menu{
+ position:fixed;z-index:10000;width:150px;padding:6px;display:flex;
+ flex-direction:column;gap:5px;border:1px solid #4b4b4b;border-radius:14px;
+ background:#151515;box-shadow:0 12px 32px rgba(0,0,0,.65)
+}
+.multiplier-menu button{
+ width:100%;min-height:46px;margin:0;border:0;border-radius:9px;
+ background:#292929;font-size:20px;font-weight:800
+}
+.winner-message{margin-top:7px;text-align:center;color:#00ff66;font-size:clamp(26px,3.5vw,44px);font-weight:800}
+.score-animation{
+ position:fixed;top:18px;right:24px;z-index:999;color:#00ff66;
+ font-size:clamp(38px,5vw,60px);font-weight:800;
+ text-shadow:0 0 10px #00ff66,0 0 20px #00ff66;pointer-events:none
+}
+
+@media (max-height:700px){
+ #game-screen{padding:4px 7px}
+ .dart-scoreboard th{height:39px;padding:1px}
+ .mark-cell{height:32px;font-size:clamp(22px,2.5vw,34px)}
+ .target-number{font-size:clamp(18px,2vw,28px)}
+ .turn-shots{margin-top:3px}
+ .dart-box{height:27px}
+ .button-grid{margin-top:3px;gap:3px}
+ .button-row{gap:4px}
+ .target-button{height:34px}
+ .action-button{height:29px}
+}
+
+@media (max-width:760px){
+ #game-screen{padding:4px}
+ .dart-scoreboard{min-width:690px}
+ .button-row{gap:3px}
+ .target-button{min-width:52px;padding:0 6px}
+ .action-button{min-width:82px;padding:0 6px}
+}
