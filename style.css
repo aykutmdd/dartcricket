@@ -517,3 +517,12 @@ padding:8px;
         min-height:52px !important;
     }
 }
+
+
+/* ===== v4: hedef sütunu oyuncuların ortasında ===== */
+.dart-scoreboard .number-header,
+.dart-scoreboard .target-number{
+    background:#121212 !important;
+    color:#f0b400 !important;
+    font-weight:800 !important;
+}

@@ -107,35 +107,51 @@ function markSymbol(value) {
 function renderBoard() {
     const board = document.getElementById("scoreboard");
 
+    // Hedef sütununu oyuncuların ortasına yerleştir.
+    // Çift oyuncu sayısında tam orta; tek oyuncu sayısında sağ tarafta bir oyuncu fazla kalır.
+    const splitIndex = Math.floor(players.length / 2);
+
     let html = `
         <table class="dart-scoreboard">
             <tr>
-                <th class="number-header">HEDEF</th>
     `;
 
-    players.forEach((player, i) => {
-        html += `
-            <th class="${i === activePlayer ? "active-player" : ""}">
-                ${i === activePlayer ? "▶ " : ""}
-                ${player.name}
-                <span class="player-score">${player.score}</span>
-            </th>
-        `;
-    });
+    for (let i = 0; i <= players.length; i++) {
+        if (i === splitIndex) {
+            html += `<th class="number-header">HEDEF</th>`;
+        }
+
+        if (i < players.length) {
+            const player = players[i];
+
+            html += `
+                <th class="${i === activePlayer ? "active-player" : ""}">
+                    ${i === activePlayer ? "▶ " : ""}
+                    ${player.name}
+                    <span class="player-score">${player.score}</span>
+                </th>
+            `;
+        }
+    }
 
     html += `</tr>`;
 
     cricketNumbers.forEach(number => {
         html += `<tr>`;
-        html += `<td class="target-number">${number}</td>`;
 
-        players.forEach(player => {
-            html += `
-                <td class="mark-cell">
-                    <div class="mark-symbol-wrap">${markSymbol(player.marks[number])}</div>
-                </td>
-            `;
-        });
+        for (let i = 0; i <= players.length; i++) {
+            if (i === splitIndex) {
+                html += `<td class="target-number">${number}</td>`;
+            }
+
+            if (i < players.length) {
+                html += `
+                    <td class="mark-cell">
+                        <div class="mark-symbol-wrap">${markSymbol(players[i].marks[number])}</div>
+                    </td>
+                `;
+            }
+        }
 
         html += `</tr>`;
     });
