@@ -2,7 +2,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/fireba
 import { getDatabase, ref, get, set, onValue, onDisconnect } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-database.js";
 import { firebaseConfig } from "./firebase-config-v6.js";
 
-const cricketNumbers = ["20","19","18","17","16","15","BULL"];
+const cricketNumbers = ["20","19","18","17","16","15","BULL"]; // v6.1
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
@@ -77,7 +77,12 @@ function renderBoard(state){
     </div>`;
 
   if(state.winner){
-    html += `<div class="winner-message">🏆 ${escapeHtml(state.winner)} KAZANDI</div>`;
+    html += `
+      <div class="tv-winner-overlay">
+        <div class="winner-trophy">🏆</div>
+        <div class="winner-name">${escapeHtml(state.winner)}</div>
+        <div class="winner-text">KAZANDI</div>
+      </div>`;
   }
   if(state.scoreAnimation){
     html += `<div class="score-animation">${escapeHtml(state.scoreAnimation)}</div>`;

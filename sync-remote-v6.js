@@ -2,7 +2,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/fireba
 import { getDatabase, ref, get, set, update, onValue, onDisconnect } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-database.js";
 import { firebaseConfig } from "./firebase-config-v6.js";
 
-const cricketNumbers = ["20","19","18","17","16","15","BULL"];
+const cricketNumbers = ["20","19","18","17","16","15","BULL"]; // v6.1
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 

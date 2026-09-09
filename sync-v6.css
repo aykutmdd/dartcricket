@@ -78,3 +78,93 @@ button,input{font:inherit}
   .action-button{height:43px}
   .action-row{margin-top:5px}
 }
+
+
+/* ===== v6.1 TELEFON KUMANDASI: büyük 3'lü buton düzeni ===== */
+#control-screen{
+  min-height:calc(100vh - 24px);
+  display:flex;
+  flex-direction:column;
+}
+#remote-controls{
+  width:min(100%,620px);
+  margin:auto;
+}
+.remote-controls-grid{
+  display:grid !important;
+  grid-template-columns:repeat(3,1fr) !important;
+  gap:12px !important;
+}
+.target-button{
+  height:86px !important;
+  font-size:30px !important;
+  border-radius:14px !important;
+}
+.remote-controls-grid .target-button[data-target="BULL"]{
+  grid-column:2 !important;
+  font-size:23px !important;
+}
+.action-row{
+  display:grid !important;
+  grid-template-columns:1fr 1fr !important;
+  gap:12px !important;
+  margin-top:14px !important;
+}
+.action-button{
+  height:70px !important;
+  font-size:20px !important;
+  border-radius:14px !important;
+}
+#next-btn{
+  grid-column:1 / -1 !important;
+  height:52px !important;
+  font-size:16px !important;
+  opacity:.78;
+}
+@media (max-width:520px){
+  .remote-body{padding:8px 10px max(10px,env(safe-area-inset-bottom)) !important}
+  .target-button{height:78px !important;font-size:28px !important}
+  .remote-controls-grid .target-button[data-target="BULL"]{font-size:21px !important}
+  .action-button{height:62px !important;font-size:18px !important}
+  #next-btn{height:48px !important;font-size:15px !important}
+}
+@media (orientation:landscape) and (max-height:520px){
+  #remote-controls{margin:4px auto 0 !important}
+  .remote-controls-grid{grid-template-columns:repeat(3,1fr) !important;gap:7px !important}
+  .target-button{height:54px !important;font-size:21px !important}
+  .remote-controls-grid .target-button[data-target="BULL"]{font-size:17px !important}
+  .action-row{gap:7px !important;margin-top:7px !important}
+  .action-button{height:46px !important;font-size:15px !important}
+  #next-btn{height:38px !important;font-size:13px !important}
+}
+
+/* ===== v6.1 TV: kazanan tam ekran ===== */
+.tv-winner-overlay{
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:30px;
+  background:rgba(0,0,0,.88);
+}
+.tv-winner-overlay .winner-trophy{
+  font-size:clamp(58px,9vw,120px);
+  line-height:1;
+  margin-bottom:10px;
+}
+.tv-winner-overlay .winner-name{
+  font-size:clamp(44px,7vw,96px);
+  line-height:1.05;
+  font-weight:900;
+  color:#f0b400;
+}
+.tv-winner-overlay .winner-text{
+  margin-top:14px;
+  font-size:clamp(24px,3vw,42px);
+  font-weight:900;
+  letter-spacing:.08em;
+}

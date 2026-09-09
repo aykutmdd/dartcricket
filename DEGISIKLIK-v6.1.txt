@@ -1,0 +1,6 @@
+Dart Cricket v6.1
+- Telefon kumandası 3 sütunlu büyük hedef butonları.
+- BULL ortada.
+- ISKA ve GERİ AL büyük.
+- TURU GEÇ altta daha küçük.
+- Kazanan TV'de tam ekran görünür.
