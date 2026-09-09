@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Dart Cricket — Kumanda</title>
+  <link rel="stylesheet" href="sync-v6.css">
+</head>
+<body class="remote-body">
+  <main id="remote-app">
+    <section id="join-screen" class="remote-card">
+      <div class="eyebrow">DART CRICKET — TELEFON KUMANDASI</div>
+      <h1>TV'ye Bağlan</h1>
+      <input id="join-code" class="room-input" inputmode="numeric" maxlength="4" placeholder="4 haneli oda kodu">
+      <button id="join-button" class="primary-button">BAĞLAN</button>
+      <div id="join-status" class="status"></div>
+    </section>
+
+    <section id="setup-screen" class="remote-card hidden">
+      <div class="remote-header">
+        <span>ODA <b id="setup-room"></b></span>
+        <span id="setup-status">Bağlı</span>
+      </div>
+      <h2>Kaç oyuncu?</h2>
+      <div id="player-count-buttons" class="player-count-grid"></div>
+      <div id="player-inputs"></div>
+    </section>
+
+    <section id="control-screen" class="hidden">
+      <div class="remote-header control-header">
+        <span>ODA <b id="control-room"></b></span>
+        <span id="remote-status">Bağlı</span>
+      </div>
+
+      <div class="active-card">
+        <div class="active-label">SIRA</div>
+        <div id="active-player-name" class="active-name">-</div>
+        <div id="active-player-score" class="active-score">0</div>
+      </div>
+
+      <div id="shot-strip" class="shot-strip"></div>
+      <div id="remote-controls"></div>
+      <div id="remote-message" class="remote-message"></div>
+    </section>
+  </main>
+
+  <script type="module" src="sync-remote-v6.js"></script>
+</body>
+</html>

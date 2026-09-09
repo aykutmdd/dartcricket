@@ -1,0 +1,55 @@
+DART CRICKET v6 — TV + TELEFON KUMANDASI (FAZ 1)
+=======================================================
+
+BU PAKET MEVCUT v5'İ BOZMAZ.
+Mevcut index.html, app-v5.js ve style-v5.css dosyalarına dokunma.
+Bu ZIP'teki 6 yeni dosyayı GitHub deposuna AYRICA yükle.
+
+Dosyalar:
+- tv.html
+- remote.html
+- firebase-config-v6.js
+- sync-tv-v6.js
+- sync-remote-v6.js
+- sync-v6.css
+
+KULLANIM
+1) TV:
+   https://aykutmdd.github.io/dartcricket/tv.html
+   TV sana 4 haneli oda kodu gösterir.
+
+2) Telefon:
+   https://aykutmdd.github.io/dartcricket/remote.html
+   TV'deki oda kodunu gir.
+   Oyuncuları seç ve oyunu başlat.
+   Telefon sadece kumanda olur, TV sadece skor ekranı.
+
+FIREBASE KURULUMU (bir defalık)
+1) https://console.firebase.google.com/ adresinden yeni proje oluştur.
+2) Project Overview ekranında Web (</>) uygulaması ekle.
+3) Sana verilen firebaseConfig nesnesindeki değerleri
+   firebase-config-v6.js dosyasına yapıştır.
+4) Build > Realtime Database > Create Database ile veritabanı oluştur.
+5) İlk TEST için Rules bölümüne aşağıdakini koy:
+
+{
+  "rules": {
+    ".read": true,
+    ".write": true
+  }
+}
+
+UYARI:
+Bu kurallar sadece ilk deneme için basit tutulmuştur. İnternete açık yazma izni verir.
+Sistem çalıştıktan sonra ikinci aşamada güvenli oda erişimi / anonim kimlik doğrulama
+ekleyip kuralları sıkılaştıracağız.
+
+6) ZIP'teki dosyaları GitHub'a yükle ve Commit changes yap.
+7) GitHub Pages'in güncellenmesi için kısa bir süre bekleyip TV/telefon sayfalarını aç.
+
+NOTLAR
+- Faz 1'de QR kod yok; oda koduyla bağlanıyoruz.
+- TV kumandası oyunu yönetmiyor. TV sadece ekran.
+- Oyun mantığı telefondaki kumandada çalışıyor ve Firebase Realtime Database üzerinden
+  TV'ye anında aktarılıyor.
+- v5 mevcut telefon+yansıtma yöntemin aynen kullanılabilir durumda kalır.

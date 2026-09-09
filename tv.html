@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dart Cricket — TV</title>
+  <link rel="stylesheet" href="sync-v6.css">
+</head>
+<body class="tv-body">
+  <main id="tv-app">
+    <section id="tv-waiting" class="waiting-card">
+      <div class="eyebrow">DART CRICKET — TV EKRANI</div>
+      <h1>Oda Kodu</h1>
+      <div id="room-code" class="room-code">----</div>
+      <p>Telefonda <b>remote.html</b> sayfasını açıp bu kodu gir.</p>
+      <div id="tv-status" class="status">Bağlanıyor…</div>
+    </section>
+
+    <section id="tv-game" class="hidden">
+      <div class="tv-topbar">
+        <div>DART CRICKET</div>
+        <div>ODA <span id="tv-room-small">----</span></div>
+      </div>
+      <div id="scoreboard"></div>
+      <div id="tv-status-game" class="status compact">Bağlı</div>
+    </section>
+  </main>
+
+  <script type="module" src="sync-tv-v6.js"></script>
+</body>
+</html>
