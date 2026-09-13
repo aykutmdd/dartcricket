@@ -1,0 +1,233 @@
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:#0d0d0d;color:#fff;font-family:Arial,Helvetica,sans-serif}
+button,input{font:inherit}
+.hidden{display:none!important}
+.status{margin-top:14px;color:#aaa;font-size:15px}
+.status.compact{position:fixed;right:12px;bottom:8px;font-size:12px;opacity:.65}
+.eyebrow{font-size:13px;letter-spacing:.15em;color:#aaa;font-weight:700}
+
+/* TV */
+.tv-body{overflow:hidden}
+#tv-app{min-height:100vh}
+.waiting-card{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:30px}
+.waiting-card h1{margin:14px 0 4px;font-size:28px}
+.room-code{font-size:clamp(70px,12vw,150px);font-weight:900;letter-spacing:.12em;color:#f0b400;line-height:1}
+.waiting-card p{font-size:20px;color:#ddd}
+.tv-topbar{height:38px;display:flex;justify-content:space-between;align-items:center;padding:0 18px;color:#aaa;font-weight:700;letter-spacing:.06em}
+#scoreboard{padding:4px 12px 8px}
+.dart-scoreboard{border-collapse:collapse;width:100%;table-layout:fixed;background:#111}
+.dart-scoreboard th,.dart-scoreboard td{border:1px solid #333;text-align:center}
+.dart-scoreboard th{height:62px;font-size:clamp(18px,2.4vw,34px);font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dart-scoreboard td{height:68px}
+.dart-scoreboard .number-header,.dart-scoreboard .target-number{width:11%;min-width:76px;background:#121212;color:#f0b400;font-weight:900}
+.dart-scoreboard .target-number{font-size:clamp(25px,3vw,42px)}
+.dart-scoreboard .active-player{outline:3px solid #21d46b;outline-offset:-3px;color:#fff}
+.player-score{display:block;font-size:.65em;color:#f0b400;margin-top:2px}
+.mark-symbol-wrap{height:66px;display:flex;align-items:center;justify-content:center;font-size:clamp(34px,4.4vw,62px);font-weight:800;line-height:1;overflow:hidden}
+.turn-shots{display:flex;justify-content:center;gap:14px;padding:8px 0 0}
+.dart-box{min-width:100px;height:45px;border:1px solid #2f6;background:#13241a;display:flex;align-items:center;justify-content:center;font-size:21px;font-weight:800;border-radius:7px}
+.winner-message{text-align:center;font-size:36px;font-weight:900;color:#f0b400;padding:8px}
+.score-animation{text-align:center;font-size:30px;color:#21d46b;font-weight:900}
+
+/* Phone remote */
+.remote-body{min-height:100vh;padding:max(12px,env(safe-area-inset-top)) 12px max(12px,env(safe-area-inset-bottom))}
+#remote-app{max-width:800px;margin:0 auto}
+.remote-card{padding:22px 14px;text-align:center}
+.remote-card h1,.remote-card h2{margin:12px 0 18px}
+.room-input{width:min(100%,340px);height:62px;border-radius:12px;border:2px solid #444;background:#171717;color:#fff;text-align:center;font-size:28px;letter-spacing:.12em;font-weight:800}
+.primary-button{display:block;width:min(100%,340px);margin:14px auto 0;height:58px;border:1px solid #555;border-radius:12px;background:#222;color:#fff;font-weight:900}
+.primary-button:active{transform:scale(.98)}
+.remote-header{display:flex;justify-content:space-between;align-items:center;padding:2px 4px 12px;color:#aaa;font-size:14px}
+.player-count-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:520px;margin:0 auto 18px}
+.player-count-grid button{height:54px;border-radius:10px;border:1px solid #444;background:#222;color:#fff;font-weight:800}
+.player-entry{margin:9px auto;max-width:520px}
+.player-entry input{width:100%;height:52px;border-radius:10px;border:1px solid #444;background:#161616;color:#fff;padding:0 14px;font-size:18px}
+.start-game-button{max-width:520px!important}
+.control-header{padding:2px 2px 7px}
+.active-card{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:10px;background:#151515;border:1px solid #333;border-radius:12px;padding:10px 14px;margin-bottom:8px}
+.active-label{font-size:12px;color:#999;font-weight:800}
+.active-name{font-size:22px;font-weight:900;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.active-score{font-size:30px;color:#f0b400;font-weight:900}
+.shot-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px}
+.shot-chip{height:40px;border:1px solid #2f6;background:#13241a;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:800}
+.remote-controls-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:7px}
+.target-button,.action-button{height:62px;border-radius:10px;border:1px solid #494949;background:#222;color:#fff;font-weight:900;font-size:20px;touch-action:none;user-select:none;-webkit-user-select:none}
+.target-button:active,.action-button:active{transform:scale(.97);background:#2c2c2c}
+.bull-button{font-size:16px}
+.action-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:9px}
+.action-button{font-size:15px}
+.miss-button{border-color:#864}
+.multiplier-menu{position:fixed;z-index:1000;width:160px;padding:8px;background:#090909;border:1px solid #555;border-radius:12px;box-shadow:0 8px 28px #000}
+.multiplier-menu button{width:100%;height:52px;margin:4px 0;border:1px solid #555;border-radius:9px;background:#242424;color:#fff;font-size:20px;font-weight:900}
+.remote-message{min-height:24px;text-align:center;padding-top:7px;color:#f0b400;font-weight:800}
+@media (max-width:520px){
+  .remote-controls-grid{gap:5px}
+  .target-button{height:58px;font-size:18px}
+  .bull-button{font-size:13px}
+  .action-button{height:56px;font-size:13px}
+}
+@media (orientation:landscape) and (max-height:520px){
+  .remote-body{padding:5px 9px}
+  .remote-header{padding-bottom:4px}
+  .active-card{padding:5px 10px;margin-bottom:5px}
+  .active-name{font-size:18px}
+  .active-score{font-size:24px}
+  .shot-strip{margin-bottom:5px}
+  .shot-chip{height:31px}
+  .target-button{height:48px}
+  .action-button{height:43px}
+  .action-row{margin-top:5px}
+}
+
+
+/* ===== v6.1 TELEFON KUMANDASI: büyük 3'lü buton düzeni ===== */
+#control-screen{
+  min-height:calc(100vh - 24px);
+  display:flex;
+  flex-direction:column;
+}
+#remote-controls{
+  width:min(100%,620px);
+  margin:auto;
+}
+.remote-controls-grid{
+  display:grid !important;
+  grid-template-columns:repeat(3,1fr) !important;
+  gap:12px !important;
+}
+.target-button{
+  height:86px !important;
+  font-size:30px !important;
+  border-radius:14px !important;
+}
+.remote-controls-grid .target-button[data-target="BULL"]{
+  grid-column:2 !important;
+  font-size:23px !important;
+}
+.action-row{
+  display:grid !important;
+  grid-template-columns:1fr 1fr !important;
+  gap:12px !important;
+  margin-top:14px !important;
+}
+.action-button{
+  height:70px !important;
+  font-size:20px !important;
+  border-radius:14px !important;
+}
+#next-btn{
+  grid-column:1 / -1 !important;
+  height:52px !important;
+  font-size:16px !important;
+  opacity:.78;
+}
+@media (max-width:520px){
+  .remote-body{padding:8px 10px max(10px,env(safe-area-inset-bottom)) !important}
+  .target-button{height:78px !important;font-size:28px !important}
+  .remote-controls-grid .target-button[data-target="BULL"]{font-size:21px !important}
+  .action-button{height:62px !important;font-size:18px !important}
+  #next-btn{height:48px !important;font-size:15px !important}
+}
+@media (orientation:landscape) and (max-height:520px){
+  #remote-controls{margin:4px auto 0 !important}
+  .remote-controls-grid{grid-template-columns:repeat(3,1fr) !important;gap:7px !important}
+  .target-button{height:54px !important;font-size:21px !important}
+  .remote-controls-grid .target-button[data-target="BULL"]{font-size:17px !important}
+  .action-row{gap:7px !important;margin-top:7px !important}
+  .action-button{height:46px !important;font-size:15px !important}
+  #next-btn{height:38px !important;font-size:13px !important}
+}
+
+/* ===== v6.1 TV: kazanan tam ekran ===== */
+.tv-winner-overlay{
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:30px;
+  background:rgba(0,0,0,.88);
+}
+.tv-winner-overlay .winner-trophy{
+  font-size:clamp(58px,9vw,120px);
+  line-height:1;
+  margin-bottom:10px;
+}
+.tv-winner-overlay .winner-name{
+  font-size:clamp(44px,7vw,96px);
+  line-height:1.05;
+  font-weight:900;
+  color:#f0b400;
+}
+.tv-winner-overlay .winner-text{
+  margin-top:14px;
+  font-size:clamp(24px,3vw,42px);
+  font-weight:900;
+  letter-spacing:.08em;
+}
+
+
+/* ===== v6.2 TUR SEÇİMİ ===== */
+.round-limit-section{margin:4px auto 18px;max-width:520px}
+.round-limit-section h2{margin:10px 0}
+.round-limit-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.round-limit-grid button{height:54px;border-radius:10px;border:1px solid #444;background:#222;color:#fff;font-weight:900;font-size:16px}
+.round-limit-grid button.selected,.player-count-grid button.selected{border-color:#f0b400;outline:2px solid #f0b400;color:#f0b400}
+#remote-round{color:#f0b400;font-weight:900;letter-spacing:.04em}
+
+/* ===== v6.2 TV TUR GÖSTERGESİ ===== */
+.tv-round-banner{
+  height:42px;display:flex;align-items:center;justify-content:center;
+  font-size:clamp(20px,2.5vw,34px);font-weight:900;letter-spacing:.08em;
+  color:#f0b400;margin-bottom:4px
+}
+/* Tur satırı eklendiği için tabloyu TV yüksekliğine sığdır */
+.dart-scoreboard th{height:56px}
+.dart-scoreboard td{height:61px}
+.mark-symbol-wrap{font-size:clamp(30px,4vw,58px)}
+
+/* ===== v6.2 ANİ ÖLÜM TV ===== */
+.sudden-death-panel{padding:20px 5vw 10px;text-align:center}
+.sudden-title{font-size:clamp(22px,3vw,42px);font-weight:900;color:#f0b400;margin:4px 0 22px}
+.sudden-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;max-width:1200px;margin:0 auto}
+.sudden-player{border:2px solid #444;border-radius:16px;background:#151515;padding:18px 12px}
+.sudden-player.active{border-color:#21d46b;outline:2px solid #21d46b}
+.sudden-name{font-size:clamp(20px,2.4vw,34px);font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sudden-score{font-size:clamp(52px,7vw,96px);font-weight:900;color:#f0b400;line-height:1.1;margin-top:8px}
+.winner-reason{margin-top:18px;font-size:clamp(18px,2vw,30px);font-weight:700;color:#ccc}
+
+@media(max-width:520px){
+  .round-limit-grid{grid-template-columns:repeat(2,1fr)}
+  .round-limit-grid button{height:50px}
+}
+
+
+/* ===== v6.3 BULL / BULL'S EYE ===== */
+.target-button[data-target="BULL"]{
+  position:relative;
+}
+.target-button[data-target="BULL"]::after{
+  content:"basılı tut: Bull's Eye";
+  position:absolute;
+  left:4px;
+  right:4px;
+  bottom:5px;
+  font-size:10px;
+  font-weight:700;
+  line-height:1;
+  opacity:.72;
+  text-transform:none;
+  letter-spacing:0;
+}
+.bullseye-menu{
+  width:190px !important;
+}
+.bullseye-menu button{
+  width:100%;
+  min-height:58px;
+  font-size:18px;
+  font-weight:900;
+}

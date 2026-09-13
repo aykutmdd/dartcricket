@@ -1,0 +1,21 @@
+Dart Cricket v6.3 — Bull's Eye düzeltmesi
+
+DÜZELTİLEN KRİTİK HATA
+- Bull's Eye artık açık biçimde ayrı bir istatistik olarak kaydedilir.
+- Tur sonu tie-break sırası:
+  1) başarılı atış
+  2) puan
+  3) en az bir Bull's Eye
+  4) toplam Bull isabeti
+  5) 3 dartlık ani ölüm
+- Bull's Eye sahibi oyuncu 3. kriterde doğru biçimde avantaj kazanır.
+
+BULL KUMANDASI
+- BULL'a kısa dokunma = normal BULL.
+- BULL'a uzun basma = yalnızca BULL'S EYE seçeneği.
+- Artık BULL için geçersiz T-BULL seçeneği yok.
+- Ekranda küçük 'basılı tut: Bull's Eye' ipucu gösterilir.
+
+TOPLAM BULL
+- Artık Bull bölgesine isabet eden dart adedini sayar.
+- Bull's Eye ayrıca kendi tie-break kriterinde tutulur.
