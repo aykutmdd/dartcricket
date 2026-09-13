@@ -23,12 +23,24 @@
       </div>
       <h2>Kaç oyuncu?</h2>
       <div id="player-count-buttons" class="player-count-grid"></div>
+
+      <div id="round-limit-section" class="round-limit-section hidden">
+        <h2>Kaç tur?</h2>
+        <div id="round-limit-buttons" class="round-limit-grid">
+          <button type="button" data-round-limit="0" class="selected">SINIRSIZ</button>
+          <button type="button" data-round-limit="20">20</button>
+          <button type="button" data-round-limit="30">30</button>
+          <button type="button" data-round-limit="40">40</button>
+        </div>
+      </div>
+
       <div id="player-inputs"></div>
     </section>
 
     <section id="control-screen" class="hidden">
       <div class="remote-header control-header">
         <span>ODA <b id="control-room"></b></span>
+        <span id="remote-round">TUR 1</span>
         <span id="remote-status">Bağlı</span>
       </div>
 

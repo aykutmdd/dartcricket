@@ -1,0 +1,17 @@
+Dart Cricket v6.2
+- Oyuncu seçiminden sonra tur seçimi: SINIRSIZ / 20 / 30 / 40.
+- Tur 1'den başlar; son oyuncu bitirince +1 ilerler.
+- TV ve telefonda tur bilgisi görünür.
+- Tur limiti dolduğunda sıralama:
+  1) başarılı atış sayısı
+  2) Cricket puanı
+  3) en az bir Bull's Eye
+  4) toplam Bull sayısı
+  5) eşit kalanlar arasında 3 dartlık ani ölüm
+- Ani ölümde yalnızca Cricket hedefleri (15-20 + BULL) puan getirir.
+- Ani ölüm yine eşitse, eşit kalanlar yeni 3 dartlık tur oynar.
+- v6.1 büyük telefon kumandası ve TV kazanan ekranı korunmuştur.
+
+Not: Başarılı atış = Cricket hedeflerinden birine isabet eden dart (S/D/T fark etmeksizin bir başarılı atış).
+Toplam Bull = Bull üzerindeki toplam isabet değeri (S=1, D=2, T=3).
+Bull's Eye = D-BULL veya üzeri olarak kaydedilen atış.

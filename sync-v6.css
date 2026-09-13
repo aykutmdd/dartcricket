@@ -168,3 +168,38 @@ button,input{font:inherit}
   font-weight:900;
   letter-spacing:.08em;
 }
+
+
+/* ===== v6.2 TUR SEÇİMİ ===== */
+.round-limit-section{margin:4px auto 18px;max-width:520px}
+.round-limit-section h2{margin:10px 0}
+.round-limit-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.round-limit-grid button{height:54px;border-radius:10px;border:1px solid #444;background:#222;color:#fff;font-weight:900;font-size:16px}
+.round-limit-grid button.selected,.player-count-grid button.selected{border-color:#f0b400;outline:2px solid #f0b400;color:#f0b400}
+#remote-round{color:#f0b400;font-weight:900;letter-spacing:.04em}
+
+/* ===== v6.2 TV TUR GÖSTERGESİ ===== */
+.tv-round-banner{
+  height:42px;display:flex;align-items:center;justify-content:center;
+  font-size:clamp(20px,2.5vw,34px);font-weight:900;letter-spacing:.08em;
+  color:#f0b400;margin-bottom:4px
+}
+/* Tur satırı eklendiği için tabloyu TV yüksekliğine sığdır */
+.dart-scoreboard th{height:56px}
+.dart-scoreboard td{height:61px}
+.mark-symbol-wrap{font-size:clamp(30px,4vw,58px)}
+
+/* ===== v6.2 ANİ ÖLÜM TV ===== */
+.sudden-death-panel{padding:20px 5vw 10px;text-align:center}
+.sudden-title{font-size:clamp(22px,3vw,42px);font-weight:900;color:#f0b400;margin:4px 0 22px}
+.sudden-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;max-width:1200px;margin:0 auto}
+.sudden-player{border:2px solid #444;border-radius:16px;background:#151515;padding:18px 12px}
+.sudden-player.active{border-color:#21d46b;outline:2px solid #21d46b}
+.sudden-name{font-size:clamp(20px,2.4vw,34px);font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sudden-score{font-size:clamp(52px,7vw,96px);font-weight:900;color:#f0b400;line-height:1.1;margin-top:8px}
+.winner-reason{margin-top:18px;font-size:clamp(18px,2vw,30px);font-weight:700;color:#ccc}
+
+@media(max-width:520px){
+  .round-limit-grid{grid-template-columns:repeat(2,1fr)}
+  .round-limit-grid button{height:50px}
+}
