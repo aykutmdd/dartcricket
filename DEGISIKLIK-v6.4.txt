@@ -1,0 +1,13 @@
+Dart Cricket v6.4
+
+KRİTİK DEĞİŞİKLİK
+- BULL ve BULL'S EYE artık iki AYRI buton.
+- BULL'a uzun basma özelliği tamamen kaldırıldı.
+- D/T uzun basma yalnızca 20,19,18,17,16,15 için çalışır.
+- Böylece DBULL/TBULL menüsünün görünmesi teknik olarak mümkün değildir.
+- Bull's Eye doğrudan ayrı butondan kaydedilir ve tie-break 3. kriterine gider.
+
+ÖNBELLEK ÖNLEMİ
+- JS/CSS dosyaları v64 olarak yeniden adlandırıldı.
+- Ayrıca remote-v64.html ve tv-v64.html eklendi.
+- Test için özellikle remote-v64.html kullanılması önerilir.
