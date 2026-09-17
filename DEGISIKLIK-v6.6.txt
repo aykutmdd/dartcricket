@@ -1,0 +1,15 @@
+Dart Cricket v6.6 — sade eşitlik sistemi
+
+TUR LİMİTİ SONUNDA SADECE:
+1. Başarılı atış sayısı
+2. Puan
+3. Hâlâ eşitse ani ölüm
+
+Bull ve Bull's Eye artık tur sonu eşitlik kriteri DEĞİLDİR.
+
+ÖNEMLİ DÜZELTME:
+Ani ölüme geçerken eşit kalan oyuncu listesi yeniden, eksiksiz ve benzersiz
+olarak oluşturulur. Başarılı atış ve puanı tamamen aynı olan 4 oyuncu varsa
+4 oyuncunun TAMAMI ani ölüme girer. Üçü eşitse üçü, ikisi eşitse ikisi girer.
+
+BULL ve BULL'S EYE ayrı buton düzeni v6.5'ten korunmuştur.
