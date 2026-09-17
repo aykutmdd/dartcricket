@@ -1,0 +1,14 @@
+Dart Cricket v6.5 — BULL'S EYE sundefined düzeltmesi
+
+HATANIN NEDENİ
+v6.4'te BULL ve BULL'S EYE ayrı buton yapılmıştı; ancak eski kısa/uzun basma
+olay yöneticisi yanlışlıkla bütün .target-button sınıfındaki butonlara bağlanıyordu.
+Yeni BULL/BULL'S EYE butonlarında data-target olmadığı için pointerup sırasında
+addMarks(undefined, 1) çalışıyor ve TV'de Sundefined oluşuyordu.
+
+DÜZELTME
+- Kısa/uzun basma S/D/T sistemi artık SADECE data-target taşıyan 20-15 butonlarına bağlanır.
+- BULL yalnız kendi click olayını kullanır: BULL, 1 mark.
+- BULL'S EYE yalnız kendi click olayını kullanır: BULL, 2 mark + bullseyes istatistiği.
+- BULL ve BULL'S EYE üzerinde uzun basma menüsü çalışmaz.
+- Dosyalar v65 olarak yeniden adlandırıldı.
