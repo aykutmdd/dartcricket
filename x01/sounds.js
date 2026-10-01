@@ -55,7 +55,7 @@ function bullseyeMelody(){
 export function playShot(action,game){
   if(!enabled)return;
   try{
-    if(game.bust){tone(220,0,.35,.2,'triangle',90);tone(150,.12,.3,.14,'triangle',65);}
+    if(game.bust){missBuzz();}
     else if(action.label==='ISKA'){missBuzz();}
     else if(action.label==='BULL'){chime([523.25,659.25,783.99,1046.5],.075);}
     else if(action.label==="BULL'S EYE"){bullseyeMelody();}
