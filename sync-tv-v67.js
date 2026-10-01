@@ -113,6 +113,6 @@ renderSoundButtons();
 init();
 
 // Sound loading cannot block room creation or score updates.
-import("./cricket-audio/sounds.js?v=6.7.1")
+import("./sounds.js?v=6.7.2")
   .then(api=>{audioApi=api;renderSoundButtons();})
   .catch(error=>{audioFailed=true;console.warn('Cricket ses dosyası yüklenemedi:',error);renderSoundButtons();});
