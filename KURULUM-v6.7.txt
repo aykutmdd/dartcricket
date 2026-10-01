@@ -1,0 +1,36 @@
+CRICKET v6.7 — SESLER + DOUBLE / TRIPLE
+
+Mevcut Cricket v6.6 üzerine uygulanacak güncelleme.
+ZIP içindeki dosyaları ve cricket-audio klasörünü GitHub dartcricket ana dizinine yükleyin.
+x01 klasörünün içine yüklemeyin. ZIP dosyasının kendisini yüklemeyin.
+GitHub: Add file > Upload files > dosyaları ve cricket-audio klasörünü sürükleyin > Commit changes.
+Yükleme listesinde tv.html, remote.html ve cricket-audio/sounds.js gibi yollar görünmeli.
+
+Mevcut Cricket adresleri aynı:
+TV: https://aykutmdd.github.io/dartcricket/tv.html
+Telefon: https://aykutmdd.github.io/dartcricket/remote.html
+Eski tv-v66.html / remote-v66.html bağlantıları da güncellenmiştir.
+Sayfaları yeniden açın, yeni oda koduyla bağlanın. TV'de SESİ AÇ düğmesine basın.
+
+KUMANDA
+Sayıya doğrudan basış = Single.
+DOUBLE ardından sayı = Double. TRIPLE ardından sayı = Triple.
+Seçili düğmeye tekrar basmak seçimi iptal eder; diğerine basmak seçimi değiştirir.
+Atış girilince seçim Single'a döner. BULL ve BULL'S EYE bağımsızdır.
+Uzun basma menüsü kaldırıldı.
+Üçüncü atıştan sonra sıra değişene kadar yeni atış girişi kilitlidir. GERİ kullanılabilir.
+
+SESLER — YALNIZCA TV
+S/D/T sayı efektleri, BULL melodisi, yüklediğiniz BULL'S EYE anonsu,
+ISKA için zooort ve kazanma sonrası gerçek alkış kaydı.
+Normal kazanma, tur sınırında kazanma ve ani ölüm sonrası kazanma alkışla karşılanır.
+BULL'S EYE ile kazanıldığında anons tamamlanır, ardından alkış başlar.
+Cricket'te bust kuralı bulunmadığı için bu oyunda bust sesi kullanılmaz.
+
+Puanlama, hedefler, tur sınırı ve eşitlik bozma kuralları v6.6 ile aynıdır.
+X01 dosyaları bu pakette bulunmaz.
+
+Kontroller: 2–6 oyuncu, çarpan seçimi/iptali/sıfırlama, hedef kapatma, ekstra puan,
+Bull değerleri, üçüncü dart kilidi, geri alma, ISKA, normal ve ani ölüm kazanması,
+tek ses olayı ve anons ardından alkış otomatik kontrollerden geçti.
+Fiziksel TV ve telefondaki son görünüm ve ses testi kullanıcı cihazında yapılmalıdır.

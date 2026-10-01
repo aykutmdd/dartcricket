@@ -1,1 +1,34 @@
-<!doctype html><html lang="tr"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>X01 — TV</title><link rel="stylesheet" href="style.css"><body class="tv"><main id="app"><p>Bağlanıyor…</p></main><script type="module" src="app.js?v=1.1"></script></body></html>
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dart Cricket — TV</title>
+  <link rel="stylesheet" href="sync-v66.css">
+  <link rel="stylesheet" href="cricket-audio/audio.css?v=6.7">
+</head>
+<body class="tv-body">
+  <main id="tv-app">
+    <section id="tv-waiting" class="waiting-card">
+      <div class="eyebrow">DART CRICKET — TV EKRANI</div>
+      <h1>Oda Kodu</h1>
+      <div id="room-code" class="room-code">----</div>
+      <p>Telefonda <b>remote.html</b> sayfasını açıp bu kodu gir.</p>
+      <button type="button" class="cricket-sound-button" data-cricket-sound>🔊 SESİ AÇ</button>
+      <div id="tv-status" class="status">Bağlanıyor…</div>
+    </section>
+
+    <section id="tv-game" class="hidden">
+      <div class="tv-topbar">
+        <div>DART CRICKET</div>
+        <button type="button" class="cricket-sound-button" data-cricket-sound>🔊 SESİ AÇ</button>
+        <div>ODA <span id="tv-room-small">----</span></div>
+      </div>
+      <div id="scoreboard"></div>
+      <div id="tv-status-game" class="status compact">Bağlı</div>
+    </section>
+  </main>
+
+  <script type="module" src="sync-tv-v67.js?v=6.7"></script>
+</body>
+</html>
