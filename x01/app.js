@@ -2,7 +2,7 @@ import {initializeApp} from 'https://www.gstatic.com/firebasejs/12.18.0/firebase
 import {getDatabase,ref,get,onValue,onDisconnect,runTransaction,set} from 'https://www.gstatic.com/firebasejs/12.18.0/firebase-database.js';
 import {firebaseConfig} from './firebase-config.js';
 import {initial,move} from './engine.mjs?v=1.0.1';
-import {unlockSound,soundEnabled,toggleSound,sayBullseye,playShot,stopCelebration,announceSoundReady} from './sounds.js?v=1.2';
+import {unlockSound,soundEnabled,toggleSound,playShot,stopCelebration,announceSoundReady} from './sounds.js?v=1.3';
 const db=getDatabase(initializeApp(firebaseConfig)),root=document.querySelector('#app'),tv=document.body.classList.contains('tv');
 const colors=['#ff9700','#20aaff','#ff1556','#18d978','#b18aff','#ffe05c'];
 let room='',data=null,multiplier=1,busy=false,timer=null,count=2,mode=501,connected=false,tvSoundReady=false,observedRoom=false;
@@ -30,7 +30,6 @@ function handleTVAudio(previous,next){
   if(previous?.game?.winner!=null&&next.game?.winner==null)stopCelebration();
   const event=next.soundEvent;
   if(!event||event.id===previous?.soundEvent?.id)return;
-  if(event.label==="BULL'S EYE")sayBullseye();
   playShot({label:event.label},{bust:event.bust,winner:event.won?0:null});
 }
 root.addEventListener('click',event=>{

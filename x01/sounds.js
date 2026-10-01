@@ -1,5 +1,5 @@
-// Local effects: no third-party sound service or audio downloads.
-let context=null,master=null,enabled=true,celebrationTimer=null;
+// Effects play locally; recorded applause is bundled with this application.
+let context=null,master=null,enabled=true,celebrationTimer=null,applauseBuffer=null,applauseLoading=null,applauseSource=null,celebrationEpoch=0;
 try{enabled=localStorage.getItem('x01Sound')!=='off';}catch{}
 export function soundEnabled(){return enabled;}
 export function unlockSound(){
@@ -10,48 +10,58 @@ export function unlockSound(){
     if(!context){context=new Audio();master=context.createGain();master.gain.value=.55;master.connect(context.destination);}
     if(context.state!=='running')context.resume().catch(()=>{});
     // A silent sample activates audio during the button gesture on mobile.
-    const source=context.createBufferSource();source.buffer=context.createBuffer(1,1,context.sampleRate);source.connect(master);source.start();
+    const source=context.createBufferSource();source.buffer=context.createBuffer(1,1,context.sampleRate);source.connect(master);source.start();loadApplause();
   }catch{}
 }
-export function toggleSound(){enabled=!enabled;try{localStorage.setItem('x01Sound',enabled?'on':'off');}catch{}if(!enabled){clearTimeout(celebrationTimer);try{window.speechSynthesis?.cancel();}catch{}if(master)master.gain.value=0;}else{if(master)master.gain.value=.55;unlockSound();playShot({label:'S20'},{});}return enabled;}
+export function toggleSound(){enabled=!enabled;try{localStorage.setItem('x01Sound',enabled?'on':'off');}catch{}if(!enabled){stopCelebration();if(master)master.gain.value=0;}else{if(master)master.gain.value=.55;unlockSound();playShot({label:'S20'},{});}return enabled;}
 function tone(frequency,offset,duration=.2,volume=.22,type='sine',endFrequency=null){
   if(!context||!master)return;
   const start=context.currentTime+offset,o=context.createOscillator(),gain=context.createGain();o.type=type;o.frequency.setValueAtTime(frequency,start);if(endFrequency)o.frequency.exponentialRampToValueAtTime(endFrequency,start+duration);gain.gain.setValueAtTime(0,start);gain.gain.linearRampToValueAtTime(volume,start+.006);gain.gain.exponentialRampToValueAtTime(.0001,start+duration);o.connect(gain);gain.connect(master);o.start(start);o.stop(start+duration+.02);o.onended=()=>{o.disconnect();gain.disconnect();};
 }
 function chime(notes,step=.09){notes.forEach((f,i)=>{tone(f,i*step,.25,.18);tone(f*2,i*step,.14,.045);});}
-function applause(){
-  if(!context)return;
-  // Overlapping filtered noise bursts imitate a small crowd clapping.
-  const duration=2.6,length=Math.ceil(context.sampleRate*duration),buffer=context.createBuffer(2,length,context.sampleRate);
-  for(let channel=0;channel<2;channel++){
-    const samples=buffer.getChannelData(channel);
-    for(let clap=0;clap<95;clap++){
-      const at=Math.floor((.06+Math.random()*2.2)*context.sampleRate),tail=Math.floor((.025+Math.random()*.045)*context.sampleRate),strength=.11+Math.random()*.15;
-      for(let i=0;i<tail&&at+i<length;i++)samples[at+i]+=(Math.random()*2-1)*strength*Math.exp(-i/(tail*.19));
-    }
-    for(let i=0;i<length;i++)samples[i]=Math.tanh(samples[i]);
-  }
-  const source=context.createBufferSource(),filter=context.createBiquadFilter(),gain=context.createGain();source.buffer=buffer;filter.type='bandpass';filter.frequency.value=1600;filter.Q.value=.6;gain.gain.value=.9;source.connect(filter);filter.connect(gain);gain.connect(master);source.start();source.onended=()=>{source.disconnect();filter.disconnect();gain.disconnect();};
+function loadApplause(){
+  if(applauseBuffer)return Promise.resolve(applauseBuffer);
+  if(applauseLoading)return applauseLoading;
+  if(!context)return Promise.resolve(null);
+  applauseLoading=fetch(new URL('./applause.mp3?v=1.3',import.meta.url))
+    .then(response=>{if(!response.ok)throw Error('Alkış dosyası yüklenemedi');return response.arrayBuffer();})
+    .then(bytes=>context.decodeAudioData(bytes))
+    .then(buffer=>{applauseBuffer=buffer;return buffer;})
+    .catch(error=>{console.warn(error.message);return null;})
+    .finally(()=>{applauseLoading=null;});
+  return applauseLoading;
 }
-export function sayBullseye(){
-  if(!enabled)return;
-  // Called directly from the tap so mobile speech permissions apply.
-  try{if(!('speechSynthesis' in window)||!window.SpeechSynthesisUtterance)return;window.speechSynthesis.cancel();const phrase=new SpeechSynthesisUtterance("Bull's eye!");phrase.lang='en-US';phrase.rate=.9;phrase.pitch=1.05;phrase.volume=.9;const voice=window.speechSynthesis.getVoices().find(v=>/^en[-_]/i.test(v.lang));if(voice)phrase.voice=voice;window.speechSynthesis.speak(phrase);}catch{}
+async function applause(){
+  const epoch=celebrationEpoch,buffer=await loadApplause();
+  if(!enabled||epoch!==celebrationEpoch||!buffer||!context)return;
+  if(applauseSource)try{applauseSource.stop();}catch{}
+  const source=context.createBufferSource(),gain=context.createGain();
+  source.buffer=buffer;gain.gain.value=1.25;source.connect(gain);gain.connect(master);applauseSource=source;source.start();
+  source.onended=()=>{source.disconnect();gain.disconnect();if(applauseSource===source)applauseSource=null;};
+}
+function missBuzz(){
+  if(!context||!master)return;
+  const start=context.currentTime,duration=.72,o=context.createOscillator(),filter=context.createBiquadFilter(),gain=context.createGain(),vibrato=context.createOscillator(),depth=context.createGain();
+  o.type='sawtooth';o.frequency.setValueAtTime(115,start);o.frequency.exponentialRampToValueAtTime(42,start+duration);
+  filter.type='lowpass';filter.Q.value=3;filter.frequency.setValueAtTime(700,start);filter.frequency.exponentialRampToValueAtTime(180,start+duration);
+  gain.gain.setValueAtTime(0,start);gain.gain.linearRampToValueAtTime(.3,start+.025);gain.gain.setValueAtTime(.25,start+.43);gain.gain.exponentialRampToValueAtTime(.0001,start+duration);
+  vibrato.frequency.value=22;depth.gain.value=8;vibrato.connect(depth);depth.connect(o.frequency);o.connect(filter);filter.connect(gain);gain.connect(master);o.start(start);vibrato.start(start);o.stop(start+duration+.02);vibrato.stop(start+duration+.02);
+  o.onended=()=>{o.disconnect();filter.disconnect();gain.disconnect();vibrato.disconnect();depth.disconnect();};
+}
+function bullseyeMelody(){
+  for(const offset of [0,.25]){tone(587.33,offset,.19,.19,'triangle');tone(880,offset,.2,.08);tone(1174.66,offset,.16,.04);}
+  tone(783.99,.5,1,.2,'triangle');tone(1174.66,.5,1.05,.10);tone(1567.98,.5,.9,.05);
 }
 export function playShot(action,game){
   if(!enabled)return;
   try{
     if(game.bust){tone(220,0,.35,.2,'triangle',90);tone(150,.12,.3,.14,'triangle',65);}
-    else if(action.label==='ISKA'){tone(180,0,.22,.2,'triangle',65);}
+    else if(action.label==='ISKA'){missBuzz();}
     else if(action.label==='BULL'){chime([523.25,659.25,783.99,1046.5],.075);}
-    else if(action.label==="BULL'S EYE"){chime([784,1047,1568],.09);}
+    else if(action.label==="BULL'S EYE"){bullseyeMelody();}
     else {const m=action.label?.startsWith('T')?3:action.label?.startsWith('D')?2:1;chime(m===3?[880,1175,1568]:m===2?[880,1320]:[1047,1568]);}
-    if(game.winner!=null){clearTimeout(celebrationTimer);celebrationTimer=setTimeout(()=>{if(enabled)try{chime([523,659,784,1047],.13);applause();}catch{}},action.label==="BULL'S EYE"?1000:280);}
+    if(game.winner!=null){clearTimeout(celebrationTimer);celebrationTimer=setTimeout(()=>{if(enabled)applause().catch(()=>{});},action.label==="BULL'S EYE"?1500:280);}
   }catch{}
 }
-export function stopCelebration(){clearTimeout(celebrationTimer);try{window.speechSynthesis?.cancel();}catch{}}
-
-export function announceSoundReady(){
-  if(!enabled)return;
-  try{if(!window.speechSynthesis||!window.SpeechSynthesisUtterance)return;const phrase=new SpeechSynthesisUtterance('Ses açık.');phrase.lang='tr-TR';phrase.volume=.8;window.speechSynthesis.speak(phrase);}catch{}
-}
+export function stopCelebration(){celebrationEpoch++;clearTimeout(celebrationTimer);if(applauseSource){try{applauseSource.stop();}catch{}applauseSource=null;}}
+export function announceSoundReady(){} // The activation chime confirms audio is enabled.
