@@ -1,0 +1,32 @@
+DART X01 — v1.0
+
+Bu uygulama Cricket'ten ayrı çalışır. Cricket dosyalarını değiştirmeyin.
+
+1. ZIP'i açın. x01 klasörünü GitHub Pages sitenizde ayrı bir klasör olarak yükleyin.
+2. TV'de sitenizin /x01/tv.html adresini açın.
+3. Telefonda aynı sitenin /x01/remote.html adresini açın.
+4. TV'deki dört haneli kodu telefona yazın.
+5. 2–6 oyuncu seçin, isimlerini girin ve 101 / 301 / 501 seçin.
+
+Mevcut Cricket Firebase yapılandırması aynen kullanılmıştır. İnternet gerekir.
+Dosyaları çift tıklayarak file:// üzerinden açmayın; GitHub Pages veya bir HTTP sunucusu gerekir.
+Firebase kurallarının rooms altındaki odalarda okuma/yazma ve transaction işlemlerine izin vermesi gerekir.
+X01 odaları gameType: x01 ile ayrılır. Cricket odasının koduyla X01 kumandası bağlanmaz.
+
+KUMANDA
+Sayı: Single. DOUBLE/TRIPLE: seç, sonra sayı gir. Bir girişten sonra seçim kapanır.
+Seçili DOUBLE/TRIPLE butonuna tekrar basmak seçimi iptal eder.
+BULL 25, BULL'S EYE 50 puandır; çarpan uygulanmaz.
+ISKA dart tüketir. TURU GEÇ kalan dartları kullanmadan sırayı verir.
+GERİ son atışı veya manuel tur geçişini geri alır; oyuncu değiştikten ve kazanan belirlendikten sonra da kullanılabilir.
+Geri alma geçmişi son 150 işlem için odada saklanır.
+Üçüncü darttan sonra kısa bekleme, bust sonrası 1,6 saniyelik gösterim bulunur.
+Bekleme sırasında GERİ haricindeki atış tuşları kilitlenir.
+Tam sıfır kazanır; 1 puan kalması geçerlidir. Double in/out koşulu yoktur.
+Kazanan ekranındaki YENİ OYUN oyuncu kurulumuna döner.
+TV açık tutulmalı. Sayfayı yenilemek yeni oda oluşturur.
+
+DOĞRULAMA
+Oyun motoru Node ile 2–6 oyuncu ve tüm başlangıç skorlarında kontrol edildi.
+Bust, tam sıfır, 1 puan kalması, 3 dart, sıra/tur geçişi ve beklemede atış kilidi kontrol edildi.
+Canlı Firebase bağlantısı ve fiziksel TV/telefon üzerinde görünüm bu ortamda doğrulanmadı.
