@@ -50,3 +50,8 @@ export function playShot(action,game){
   }catch{}
 }
 export function stopCelebration(){clearTimeout(celebrationTimer);try{window.speechSynthesis?.cancel();}catch{}}
+
+export function announceSoundReady(){
+  if(!enabled)return;
+  try{if(!window.speechSynthesis||!window.SpeechSynthesisUtterance)return;const phrase=new SpeechSynthesisUtterance('Ses açık.');phrase.lang='tr-TR';phrase.volume=.8;window.speechSynthesis.speak(phrase);}catch{}
+}
