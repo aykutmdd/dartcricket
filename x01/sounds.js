@@ -1,5 +1,5 @@
 // Effects play locally; recorded applause is bundled with this application.
-let context=null,master=null,enabled=true,celebrationTimer=null,applauseBuffer=null,applauseLoading=null,applauseSource=null,celebrationEpoch=0;
+let context=null,master=null,enabled=true,celebrationTimer=null,applauseBuffer=null,applauseLoading=null,applauseSource=null,celebrationEpoch=0,bullseyeBuffer=null,bullseyeLoading=null,bullseyeSource=null;
 try{enabled=localStorage.getItem('x01Sound')!=='off';}catch{}
 export function soundEnabled(){return enabled;}
 export function unlockSound(){
@@ -10,7 +10,7 @@ export function unlockSound(){
     if(!context){context=new Audio();master=context.createGain();master.gain.value=.55;master.connect(context.destination);}
     if(context.state!=='running')context.resume().catch(()=>{});
     // A silent sample activates audio during the button gesture on mobile.
-    const source=context.createBufferSource();source.buffer=context.createBuffer(1,1,context.sampleRate);source.connect(master);source.start();loadApplause();
+    const source=context.createBufferSource();source.buffer=context.createBuffer(1,1,context.sampleRate);source.connect(master);source.start();loadApplause();loadBullseye();
   }catch{}
 }
 export function toggleSound(){enabled=!enabled;try{localStorage.setItem('x01Sound',enabled?'on':'off');}catch{}if(!enabled){stopCelebration();if(master)master.gain.value=0;}else{if(master)master.gain.value=.55;unlockSound();playShot({label:'S20'},{});}return enabled;}
@@ -48,20 +48,39 @@ function missBuzz(){
   vibrato.frequency.value=22;depth.gain.value=8;vibrato.connect(depth);depth.connect(o.frequency);o.connect(filter);filter.connect(gain);gain.connect(master);o.start(start);vibrato.start(start);o.stop(start+duration+.02);vibrato.stop(start+duration+.02);
   o.onended=()=>{o.disconnect();filter.disconnect();gain.disconnect();vibrato.disconnect();depth.disconnect();};
 }
-function bullseyeMelody(){
-  for(const offset of [0,.25]){tone(587.33,offset,.19,.19,'triangle');tone(880,offset,.2,.08);tone(1174.66,offset,.16,.04);}
-  tone(783.99,.5,1,.2,'triangle');tone(1174.66,.5,1.05,.10);tone(1567.98,.5,.9,.05);
+function loadBullseye(){
+  if(bullseyeBuffer)return Promise.resolve(bullseyeBuffer);
+  if(bullseyeLoading)return bullseyeLoading;
+  if(!context)return Promise.resolve(null);
+  bullseyeLoading=fetch(new URL('./bullseye.mp3?v=1.4',import.meta.url))
+    .then(response=>{if(!response.ok)throw Error('Bull’s eye dosyası yüklenemedi');return response.arrayBuffer();})
+    .then(bytes=>context.decodeAudioData(bytes))
+    .then(buffer=>{bullseyeBuffer=buffer;return buffer;})
+    .catch(error=>{console.warn(error.message);return null;})
+    .finally(()=>{bullseyeLoading=null;});
+  return bullseyeLoading;
+}
+async function playBullseye(){
+  const epoch=celebrationEpoch,buffer=await loadBullseye();
+  if(!enabled||epoch!==celebrationEpoch||!buffer||!context)return;
+  if(bullseyeSource)try{bullseyeSource.stop();}catch{}
+  const source=context.createBufferSource(),gain=context.createGain();source.buffer=buffer;gain.gain.value=1.2;source.connect(gain);gain.connect(master);bullseyeSource=source;
+  await new Promise(resolve=>{source.onended=()=>{source.disconnect();gain.disconnect();if(bullseyeSource===source)bullseyeSource=null;resolve();};source.start();});
 }
 export function playShot(action,game){
   if(!enabled)return;
+  const epoch=celebrationEpoch;let bullseyeFinished=null;
   try{
     if(game.bust){missBuzz();}
     else if(action.label==='ISKA'){missBuzz();}
     else if(action.label==='BULL'){chime([523.25,659.25,783.99,1046.5],.075);}
-    else if(action.label==="BULL'S EYE"){bullseyeMelody();}
+    else if(action.label==="BULL'S EYE"){bullseyeFinished=playBullseye();}
     else {const m=action.label?.startsWith('T')?3:action.label?.startsWith('D')?2:1;chime(m===3?[880,1175,1568]:m===2?[880,1320]:[1047,1568]);}
-    if(game.winner!=null){clearTimeout(celebrationTimer);celebrationTimer=setTimeout(()=>{if(enabled)applause().catch(()=>{});},action.label==="BULL'S EYE"?1500:280);}
+    if(game.winner!=null){
+      const schedule=()=>{if(!enabled||epoch!==celebrationEpoch)return;clearTimeout(celebrationTimer);celebrationTimer=setTimeout(()=>{if(enabled&&epoch===celebrationEpoch)applause().catch(()=>{});},280);};
+      if(bullseyeFinished)bullseyeFinished.then(schedule).catch(()=>{});else schedule();
+    }
   }catch{}
 }
-export function stopCelebration(){celebrationEpoch++;clearTimeout(celebrationTimer);if(applauseSource){try{applauseSource.stop();}catch{}applauseSource=null;}}
+export function stopCelebration(){celebrationEpoch++;clearTimeout(celebrationTimer);if(bullseyeSource){try{bullseyeSource.stop();}catch{}bullseyeSource=null;}if(applauseSource){try{applauseSource.stop();}catch{}applauseSource=null;}}
 export function announceSoundReady(){} // The activation chime confirms audio is enabled.
