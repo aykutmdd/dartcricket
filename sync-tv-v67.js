@@ -1,7 +1,14 @@
-import {unlockSound,soundEnabled,toggleSound,playShot,playWin,stopCelebration} from "./cricket-audio/sounds.js?v=6.7";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
 import { getDatabase, ref, get, set, onValue, onDisconnect } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-database.js";
 import { firebaseConfig } from "./firebase-config-v6.js";
+
+let audioApi=null,audioFailed=false;
+function unlockSound(){audioApi?.unlockSound();}
+function soundEnabled(){return audioApi?.soundEnabled()||false;}
+function toggleSound(){audioApi?.toggleSound();}
+function playShot(action,game){audioApi?.playShot(action,game);}
+function playWin(){audioApi?.playWin();}
+function stopCelebration(){audioApi?.stopCelebration();}
 
 const cricketNumbers=["20","19","18","17","16","15","BULL"];
 const app=initializeApp(firebaseConfig);
@@ -96,10 +103,16 @@ function receiveAudio(data){
   if(newEvent&&event.kind==='shot')playShot({label:event.label},{winner:won?0:null});
   else if(won)playWin();
 }
-function renderSoundButtons(){document.querySelectorAll('[data-cricket-sound]').forEach(button=>{button.textContent=!soundReady?'🔊 SESİ AÇ':soundEnabled()?'🔊 SES AÇIK':'🔇 SES KAPALI';button.setAttribute('aria-pressed',String(soundReady&&soundEnabled()));});}
+function renderSoundButtons(){document.querySelectorAll('[data-cricket-sound]').forEach(button=>{button.disabled=!audioApi;button.textContent=!audioApi?(audioFailed?'Ses dosyaları yüklenemedi':'Ses yükleniyor…'):!soundReady?'🔊 SESİ AÇ':soundEnabled()?'🔊 SES AÇIK':'🔇 SES KAPALI';button.setAttribute('aria-pressed',String(soundReady&&soundEnabled()));});}
 document.querySelectorAll('[data-cricket-sound]').forEach(button=>button.addEventListener('click',()=>{
+  if(!audioApi)return;
   if(!soundReady){if(!soundEnabled())toggleSound();else{unlockSound();playShot({label:'S20'},{});}soundReady=true;}
   else toggleSound();renderSoundButtons();
 }));
 renderSoundButtons();
 init();
+
+// Sound loading cannot block room creation or score updates.
+import("./cricket-audio/sounds.js?v=6.7.1")
+  .then(api=>{audioApi=api;renderSoundButtons();})
+  .catch(error=>{audioFailed=true;console.warn('Cricket ses dosyası yüklenemedi:',error);renderSoundButtons();});
